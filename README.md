@@ -37,7 +37,7 @@ Things you may want to cover:
 - has_many :messages
 
 ## roomsテーブル
-|Column|Type|Options----|
+|Column|Type|Options    |
 |----|------|-----------|
 |name|string|null: false|
 
