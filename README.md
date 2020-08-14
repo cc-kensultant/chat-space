@@ -26,41 +26,42 @@ Things you may want to cover:
 
 
 ## usersテーブル
-|Column|Type|Options|
-|------|----|-------|
-|name|string|null: false|
-|email|string|null: false|
+|Column  |Type  |Options    |
+|--------|------|-----------|
+|name    |string|null: false|
+|email   |string|null: false|
 |password|string|null: false|
 ### Association
-- has_many :groups, through: :groups_users
-- has_many :chats
+- has_many : room_users
+- has_many :rooms, through: :room_users
+- has_many :messages
 
 ## roomsテーブル
-|Column|Type|Options|
-|------|----|-------|
+|Column|Type|Options----|
+|----|------|-----------|
 |name|string|null: false|
-|user_id|integer|null: false, foreign_key: true|
-### Association
-- has_many :users, through: :groups_users
-- has_many :chats
 
-## messagesテーブル
-|Column|Type|Options|
-|------|----|-------|
-|text|string|null: false|
-|image|string|null: false|
-|time|integer|null: false, foreign_key: true|
-|room_id|integer|null: false, foreign_key: true|
-|user_id|integer|null: false, foreign_key: true|
 ### Association
-- belongs_to :group
+- has_many :users
+- has_many :users, through: :room_users
+- has_many :messages
+
+## room_usersテーブル
+|Column|Type|Options|
+|----|---------|------------------------------|
+|user|reference|null: false, foreign_key: true|
+|room|reference|null: false, foreign_key: true|
+### Association
+- belongs_to :room
 - belongs_to :user
 
-## roomss_usersテーブル
-|Column|Type|Options|
-|------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|room_id|integer|null: false, foreign_key: true|
+## messages テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| content | string     |                                |
+| user    | references | null: false, foreign_key: true |
+| room    | references | null: false, foreign_key: true |
 ### Association
-- belongs_to :group
+- belongs_to :room
 - belongs_to :user
